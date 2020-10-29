@@ -12,7 +12,7 @@
 var numeriComputer = [];
 var verifica = false;
 
-// perche se i < 16 non fa correttamente ma bisogna inserire length?
+// errore era nel mettere i < 16 perche i lineare quindi fa solo 16 volte il ciclo mentre con length < 16, fino a quando nell array non ci sono 16 numeri continua il ciclo
 for (var i = 0; numeriComputer.length < 16; i++) {
 
   var numeriRandom = getRandomNum(100);
@@ -23,14 +23,17 @@ for (var i = 0; numeriComputer.length < 16; i++) {
 }
 
 console.log(numeriComputer);
+
 // chiedo utente di inserire max 84 numeri compresi tra 1 e 100
 var numeriUtente = [];
 
-for (var i = 0; numeriUtente.length < 5; i++) {
+for (var i = 0; numeriUtente.length < 84; i++) {
   var numeriInsUtente = parseInt(prompt("Inserisci un numero tra 1 e 100"));
 
-  if(numeriUtente.indexOf(numeriInsUtente) == -1 && numeriInsUtente > 0 && numeriInsUtente <= 100 ){
-    numeriUtente.push(numeriInsUtente);
+  // se numero utente = numero generato computer, partita finita altrimenti si continua ( si mette all inizio perche prima cosa da verificare perche nel caso non sia soddisfatta gioco termina subito)
+  if (numeriComputer.includes(numeriInsUtente)){
+      alert("Sei esploso!")
+      break;
 
   } else if (numeriUtente.indexOf(numeriInsUtente) !== -1){
   // utente non puo inserire stesso numero piu volte
@@ -38,22 +41,13 @@ for (var i = 0; numeriUtente.length < 5; i++) {
 
   } else if (numeriInsUtente == 0 || numeriInsUtente > 100) {
       alert("Valore inserito fuori da 1 e 100");
-      
-  } else if (numeriComputer.includes(numeriInsUtente)){
-      alert("Sei esploso!")
-      break;
+
+  } else if (numeriUtente.indexOf(numeriInsUtente) == -1 && numeriInsUtente > 0 && numeriInsUtente <= 100 ){
+    numeriUtente.push(numeriInsUtente);
   }
-  // else if (numeriInsUtente === numeriComputer [i] ) {
-  //   console.log("mi dispiace sei esploso!");
-  // }
+
 }
 console.log(numeriUtente);
-
-
-
-
-
-// se numero utente = numero generato computer, partita finita altrimenti si continua
 
 // termine partita comunicare quanti numeri consentiti ha messo l'utente
 var puntiFatti = numeriUtente.length;
